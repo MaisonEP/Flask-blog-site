@@ -20,7 +20,9 @@ class RegistrationForm(FlaskForm):
         username = StringField('Username', validators=[DataRequired(),
         Regexp(...),EqualTo('confirm_username', message='Usernames do not match. Try again')])
 
-
+class UserPost(FlaskForm):
+    blogpost = StringField('BlogPost')
+    submit = StringField('Submit')
 
 
 class LoginForm(FlaskForm):

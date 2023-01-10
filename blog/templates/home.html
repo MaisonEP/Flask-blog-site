@@ -5,6 +5,13 @@
     by {{post.user.username}}
 </p>
 <p>{{ post.content }}</p>
-{% endfor %}
 
+
+
+{% endfor %}
+<form method=" POST" action="">
+    {{userPost.csrf_token}}
+    {{userPost.blogpost.label}} {{userPost.blogpost}}
+    <input type="submit" value="POST">
+</form>
 {% endblock content %}

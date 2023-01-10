@@ -1,7 +1,7 @@
 from flask import render_template, url_for
 from blog import app, db
 from blog.models import Post, User
-from blog.forms import RegistrationForm, LoginForm, User 
+from blog.forms import RegistrationForm, LoginForm, User, UserPost
 from flask import redirect, request, flash
 from flask_login import login_user, logout_user,  current_user
 
@@ -11,11 +11,12 @@ from flask_login import login_user, logout_user,  current_user
 
 @app.route("/")
 
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home():
     if current_user.is_authenticated:
         posts = Post.query.all()
-        return render_template('home.html', posts=posts)
+        userPost = UserPost()   
+        return render_template('home.html', posts=posts, userPost = userPost)
     else:
         return redirect(url_for('login'))
 
@@ -25,6 +26,8 @@ def about():
         return render_template('about.html', title='About Me')
     else:
         return redirect(url_for('login'))
+
+
 
 @app.route("/register",methods=['GET','POST'])
 def register():
@@ -39,6 +42,7 @@ def register():
             flash('Invalid email address or password.')
         
     return render_template('register.html',title='Register',form=form)
+
 
 @app.route("/registered")
 def registered():

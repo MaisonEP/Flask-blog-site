@@ -1,3 +1,76 @@
-div {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.navigationBar{
+    height: 100px;
+    background-color: aquamarine;
+    min-width: 1365;
+}
+.loggedInNav{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.loggedOutNav{
+
+    justify-content: space-between;
+    
+}
+
+.loginMenuItem{
+    display: flex;
+    justify-content: space-between;
+    
+    margin-top: 10px;
+}
+
+.login{
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.register{
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.menuItem{
+    margin-right: 30px;
+    margin-top: 35px;
+}
+
+.home{
+    margin-left: 50px;
+}
+
+.homeAbout{
+    display: flex;
+}
+
+.mainBody{
+    min-height: 100vh;
     background-color: rgb(255, 255, 255);
+  
+
+}
+
+.bodyLayout{
+    flex: 1;
+    display: flex;
+
+}
+
+.contentBackground{
+    min-height: 100vh;
+    flex-grow: 3;
+}
+.background{
+    background-color: cornflowerblue;
+    flex-grow: 1;
 }

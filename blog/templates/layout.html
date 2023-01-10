@@ -1,24 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html >
 
 <head>
     <meta charset="utf-8">
     <title>My Wonderful Site</title>
-    {% if current_user.is_authenticated %}
-    <a href="{{ url_for('home') }}">Home</a>&nbsp
-    <a href="{{ url_for('about') }}">About Me</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
 
-    {% else %}
-    <a href=" {{ url_for('register') }}">Register</a>
-    <a href="{{ url_for('login') }}">Login</a>
+    <div class="navigationBar">
 
-    {% endif %}
+        {% if current_user.is_authenticated %}
+
+        <div class="loggedInNav">
+            <div class="homeAbout">
+                <div class="home menuItem"><a href="{{ url_for('home') }}">Home</a>&nbsp</div>
+        
+                <div class="about menuItem"><a href="{{ url_for('about') }}">About Me</a></div>
+            </div>
+           
+        
+            <div class="logout menuItem"><a href="{{ url_for('logout') }}">Logout</a></div>
+        </div>
+        
+    
+        {% else %}
+
+        <div class="loggedOutNav">
+            <div class="loginMenuItem">
+                <div class="register">
+                    <div><a href=" {{ url_for('register') }}">Register</a></div>
+                </div>
+                
+                <div class="login">
+                    <div><a href="{{ url_for('login') }}">Login</a></div>
+                </div>
+                
+                
+            </div>
+        </div>
+       
+       
+    
+        {% endif %}
+
+    </div>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
 </head>
 
-<body>
+<body class="mainBody">
     <div id="header">
     </div>
     <div>
@@ -36,6 +64,27 @@
         {% block content %}
         {% endblock %}
     </div>
+
+    <div class="bodyLayout" >
+
+        <div class="background contentBackground">
+    
+    
+        </div>
+
+        <div class="mainContent contentBackground">
+            
+    
+    
+        </div>
+
+        <div class="background contentBackground">
+            
+    </div>
+    
+    
+</div>
+
 </body>
 
 </html>
