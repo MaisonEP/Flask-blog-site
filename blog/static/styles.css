@@ -153,3 +153,21 @@
 .author{
     margin-inline: 5px;
 }
+
+.bloglayout{
+    padding:5px;
+}
+
+.viewpost{
+    display: inline-block;
+    padding: 10px;
+    background-color: rgb(126, 225, 250);
+    box-shadow: 0 0 1px;
+}
+
+.delete{
+    display: inline-block;
+    padding: 10px;
+    background-color: rgb(126, 225, 250);
+    box-shadow: 0 0 1px;
+}

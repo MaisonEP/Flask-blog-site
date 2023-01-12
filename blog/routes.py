@@ -3,7 +3,7 @@ from blog import app, db
 from blog.models import Post, User
 from blog.forms import RegistrationForm, LoginForm, User, UserPost
 from flask import redirect, request, flash
-from flask_login import login_user, logout_user,  current_user
+from flask_login import login_user, logout_user,  current_user, login_required
 
 
 
@@ -29,11 +29,10 @@ def about():
     #add post page
 @app.route('/add-blog', methods=['GET', 'POST'])
 def add_blog():
-    form = UserPost()
-    
+    form = UserPost()    
     if form.validate_on_submit():
-        print('this is my post', )
-        post= Post(title=form.title.data, author_id = current_user.username, content=form.blogpost.data)
+        post= Post(title=form.title.data, content=form.blogpost.data, poster_id=current_user.id)
+        print('this is my post', post.poster_id)
         #clear form after submit
         form.title.data = ''
         form.blogpost.data= ''
@@ -42,12 +41,15 @@ def add_blog():
         db.session.commit()
         #blog confirmation message
         flash('Blog Posted Sucessfully!')
-        # return redirect(url_for('home'))
+        return redirect(url_for('home'))
     return render_template('post.html',form=form)
+
+
+
 
 @app.route('/UserPost/<int:id>') 
 def individualpost(id):
-    post = post.query.get_or_404(id)
+    post = Post.query.get_or_404(id)
     return render_template('individualpost.html', post=post)
 
 @app.route("/register",methods=['GET','POST'])

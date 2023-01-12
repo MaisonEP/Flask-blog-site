@@ -9,16 +9,20 @@ class Post(db.Model):
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_file = db.Column(db.String(40), nullable=True, default='default.jpg')
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    poster_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+   
 
     def __repr__(self):
         return f"Post('{self.date}', '{self.title}', '{self.content}')"
+    
+
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True, nullable=False)
     hashed_password = db.Column(db.String(128))
-    post = db.relationship('Post', backref='user', lazy=True)
+    post = db.relationship('Post', backref='post', lazy=True)
+
 
 
     def __repr__(self):

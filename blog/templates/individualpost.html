@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
+
 {% block content %}
 
-
-{% for post in posts %}
     <div class="posttemplate">
 
         <div class="bloglayout">
@@ -14,7 +13,7 @@
             <div class="authordate">
                 <p>
                     by <div class="author">
-                        
+
                     </div>
                     <div class="date">
                         {{post.date}}
@@ -26,9 +25,8 @@
                 {{ post.content }}
             </p>
 
-            <div class="viewpost">
-                <a href=" {{ url_for('individualpost', id=post.id)}}">View Post</a>
-
+            <div class="delete">
+                <a href="Delete">Delete Post</a>
             </div>
 
         </div>
@@ -36,6 +34,4 @@
     
     </div>
     
-{% endfor %}
-
 {% endblock content %}
