@@ -26,8 +26,29 @@ def about():
         return render_template('about.html', title='About Me')
     else:
         return redirect(url_for('login'))
+    #add post page
+@app.route('/add-blog', methods=['GET', 'POST'])
+def add_blog():
+    form = UserPost()
+    
+    if form.validate_on_submit():
+        print('this is my post', )
+        post= Post(title=form.title.data, author_id = current_user.username, content=form.blogpost.data)
+        #clear form after submit
+        form.title.data = ''
+        form.blogpost.data= ''
+        #add post to database
+        db.session.add(post)
+        db.session.commit()
+        #blog confirmation message
+        flash('Blog Posted Sucessfully!')
+        # return redirect(url_for('home'))
+    return render_template('post.html',form=form)
 
-
+@app.route('/UserPost/<int:id>') 
+def individualpost(id):
+    post = post.query.get_or_404(id)
+    return render_template('individualpost.html', post=post)
 
 @app.route("/register",methods=['GET','POST'])
 def register():

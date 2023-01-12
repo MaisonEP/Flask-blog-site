@@ -14,6 +14,8 @@
                 <div class="home menuItem"><a href="{{ url_for('home') }}">Home</a>&nbsp</div>
         
                 <div class="about menuItem"><a href="{{ url_for('about') }}">About Me</a></div>
+
+                <div class="post menuItem"><a href="{{ url_for('add_blog') }}">Post</a>&nbsp</div>
             </div>
            
         
@@ -49,8 +51,8 @@
 <body class="mainBody">
     <div id="header">
     </div>
-    <div>
-        {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
+    <div class="popup {{'open' if messages}}">
         {% if messages %}
         <ul class=flashes>
             {% for message in messages %}
@@ -60,10 +62,7 @@
         {% endif %}
         {% endwith %}
     </div>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+    
 
     <div class="bodyLayout" >
 
@@ -73,6 +72,13 @@
         </div>
 
         <div class="mainContent contentBackground">
+
+
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+            
             
     
     
@@ -85,6 +91,9 @@
     
 </div>
 
+
+
 </body>
+
 
 </html>

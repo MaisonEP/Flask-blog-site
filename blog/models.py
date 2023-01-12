@@ -5,10 +5,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(40), nullable=True, default='default.jpg')
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
@@ -22,7 +22,7 @@ class User(UserMixin,db.Model):
 
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}')"
+        return f"User('{self.username}')"
         
     @property
     def password(self):

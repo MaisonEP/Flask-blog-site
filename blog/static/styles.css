@@ -7,7 +7,7 @@
 
 .navigationBar{
     height: 100px;
-    background-color: aquamarine;
+    background-color: rgb(70, 67, 67);
     min-width: 1365;
 }
 .loggedInNav{
@@ -43,6 +43,8 @@
 .menuItem{
     margin-right: 30px;
     margin-top: 35px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
 }
 
 .home{
@@ -61,16 +63,93 @@
 }
 
 .bodyLayout{
-    flex: 1;
+    
     display: flex;
 
 }
 
 .contentBackground{
     min-height: 100vh;
-    flex-grow: 3;
+    flex: 3;
+    justify-content: center;
+    display: flex;
 }
 .background{
-    background-color: cornflowerblue;
+    background-color: rgb(53, 241, 163);
     flex-grow: 1;
+}
+
+.maincontent{
+    display: flex;
+    flex: 3;
+}
+
+#content{
+    width: 100%;
+    margin: 25px;
+}
+
+.content{
+    display: inline-block;
+    flex-grow: 3;
+}
+
+.postby{
+    box-shadow: 0px 0px 7px black;
+    padding-left: 5px;
+
+    /* background-color: rgb(243, 247, 252); */
+}
+
+.form-control{
+    width: 98%;
+}
+
+.postform{
+    padding-top: 5px;
+    
+   
+}
+
+.entireform{
+    padding-top: 10px;
+}
+
+.posttemplate{
+    margin-top: 10px;
+    border: 1px;
+    border-color: rgb(72, 143, 133);
+    background-color: rgb(0, 255, 242);
+    box-shadow: .1px .1px 10px black;
+
+}
+
+.postbutton{
+    padding-bottom: 10px;
+}
+
+.popup{
+    position: absolute;
+    border:  1px solid black;
+    background-color: darkorange;
+    transition: max-height 10s;
+    min-height: 0px;
+    max-height: 0px;
+    height: 100%;
+}
+
+.open{
+    max-height: 36px;
+    transition: max-height 10s;
+}
+
+.blogcontent{
+    max-width: 20px;
+}
+
+.authordate{
+    display: flex;
+}
+.author{
+    margin-inline: 5px;
 }

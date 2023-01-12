@@ -1,17 +1,31 @@
 {% extends "layout.html" %}
 {% block content %}
+
+
 {% for post in posts %}
-<p>"{{ post.title }}" &nbsp
-    by {{post.user.username}}
-</p>
-<p>{{ post.content }}</p>
-
-
-
+    <div class="posttemplate">
+        <p>
+            "{{ post.title }}" &nbsp
+        </p>
+            <br/>
+    
+        <div class="authordate">
+            <p>
+                by <div class="author">
+                    {{post.author_id}}
+                </div>
+                <div class="date">
+                    {{post.date}}
+                </div>
+            </p>
+        </div>    
+            <br/>
+        <p> <div class="blogcontent"></div>
+            {{ post.content }}
+        </p>
+    
+    </div>
+    
 {% endfor %}
-<form method=" POST" action="">
-    {{userPost.csrf_token}}
-    {{userPost.blogpost.label}} {{userPost.blogpost}}
-    <input type="submit" value="POST">
-</form>
+
 {% endblock content %}

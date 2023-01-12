@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired 
 from blog.models import User
 from wtforms.validators import ValidationError, EqualTo, Regexp
+from wtforms.widgets import TextArea
 
 
 class RegistrationForm(FlaskForm):
@@ -21,7 +22,8 @@ class RegistrationForm(FlaskForm):
         Regexp(...),EqualTo('confirm_username', message='Usernames do not match. Try again')])
 
 class UserPost(FlaskForm):
-    blogpost = StringField('BlogPost')
+    title = StringField('Title', validators=[DataRequired()])
+    blogpost = StringField('BlogPost', validators=[DataRequired()], widget=TextArea ())
     submit = StringField('Submit')
 
 
