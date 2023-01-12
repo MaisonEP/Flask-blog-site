@@ -10,7 +10,6 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     image_file = db.Column(db.String(40), nullable=True, default='default.jpg')
     poster_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-   
 
     def __repr__(self):
         return f"Post('{self.date}', '{self.title}', '{self.content}')"

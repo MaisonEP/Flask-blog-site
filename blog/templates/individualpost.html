@@ -2,36 +2,38 @@
 
 {% block content %}
 
-    <div class="posttemplate">
+<div class="posttemplate">
 
-        <div class="bloglayout">
+    <div class="bloglayout">
+        <p>
+            "{{ post.title }}" &nbsp
+        </p>
+        <br />
+
+        <div class="authordate">
             <p>
-                "{{ post.title }}" &nbsp
-            </p>
-                <br/>
-        
-            <div class="authordate">
-                <p>
-                    by <div class="author">
-
-                    </div>
-                    <div class="date">
-                        {{post.date}}
-                    </div>
-                </p>
-            </div>    
-                <br/>
-            <p> <div class="blogcontent"></div>
-                {{ post.content }}
-            </p>
-
-            <div class="delete">
-                <a href="Delete">Delete Post</a>
+                by
+            <div class="author">
+                {{post.post.username}}
             </div>
-
+            <div class="date">
+                {{post.date}}
+            </div>
+            </p>
         </div>
-        
-    
+        <br />
+        <p>
+        <div class="blogcontent"></div>
+        {{ post.content }}
+        </p>
+
+        <div class="delete">
+            <a href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
+        </div>
+
     </div>
-    
+
+
+</div>
+
 {% endblock content %}
