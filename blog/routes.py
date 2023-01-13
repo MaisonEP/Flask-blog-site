@@ -52,10 +52,10 @@ def delete_post(id):
         db.session.commit()
         flash('Post was deleted!')
 
-        print('helloooo')
+        
         return redirect(url_for('home'))
     except:
-        print('snakehhhhh' )
+       
         flash('Delete failed!')
 
         return redirect(url_for('home'))
@@ -68,8 +68,7 @@ def individualpost(id):
 @app.route("/register",methods=['GET','POST'])
 def register():
     form = RegistrationForm()
-    print('Form is validddddd', form.validate_on_submit())
-    print('hi this is above if statement', form.username.errors, form.confirm_username.errors)
+    
     if form.username.errors:
         for error in form.username.errors:
             flash(error)
