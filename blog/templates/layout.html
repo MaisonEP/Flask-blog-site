@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html >
-
-<head>
-    <meta charset="utf-8">
-    <title>My Wonderful Site</title>
-
-    <div class="navigationBar">
+<html dir="ltr" lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
+        <title>My Wonderful Site</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        
+    <div class="navigationBar ">
 
         {% if current_user.is_authenticated %}
 
@@ -44,28 +47,31 @@
         {% endif %}
 
     </div>
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
 </head>
 
 <body class="mainBody">
     <div id="header">
     </div>
-    {% with messages = get_flashed_messages() %}
-    <div class="popup {{'open' if messages}}">
-        {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    </div>
     
-
-    <div class="bodyLayout" >
-
+    
+    
+    <div class="bodyLayout " >
+        
+        {% with messages = get_flashed_messages() %}
+        
+            {% if messages %}
+                <div class="messagePopUp">
+                    {% for message in messages %}
+                
+                        <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                            <strong>{{ message }}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
         <div class="background contentBackground">
     
     

@@ -68,15 +68,17 @@ def individualpost(id):
 @app.route("/register",methods=['GET','POST'])
 def register():
     form = RegistrationForm()
+    print('Form is validddddd', form.validate_on_submit())
+    print('hi this is above if statement', form.username.errors, form.confirm_username.errors)
+    if form.username.errors:
+        for error in form.username.errors:
+            flash(error)
     if form.validate_on_submit():
         user = User(username=form.username.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Registration successful!')
-        return redirect(url_for('registered'))
-    else: 
-            flash('Invalid email address or password.')
-        
+        return redirect(url_for('login'))
     return render_template('register.html',title='Register',form=form)
 
 
@@ -92,14 +94,14 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             flash('You\'ve successfully logged in.')
-        return redirect(url_for('home'))
-    else:
-            flash('Invalid username address or password.')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password.')
     return render_template('login.html',title='Login',form=form)
 
 @app.route("/logout")
 def logout():
  
         logout_user()
-        flash('Logout successful. Bye!')
+        flash('Logout successful. See you soon!')
         return redirect(url_for('home'))

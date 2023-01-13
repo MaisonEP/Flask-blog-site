@@ -10,6 +10,11 @@
     background-color: rgb(70, 67, 67);
     min-width: 1365;
 }
+
+.scroll{
+    overflow:auto ;
+}
+
 .loggedInNav{
     display: flex;
     justify-content: space-between;
@@ -26,7 +31,6 @@
     display: flex;
     justify-content: space-between;
     
-    margin-top: 10px;
 }
 
 .login{
@@ -128,15 +132,13 @@
     padding-bottom: 10px;
 }
 
-.popup{
+.messagePopUp{
     position: absolute;
-    border:  1px solid black;
-    background-color: darkorange;
-    transition: max-height 10s;
-    min-height: 0px;
-    max-height: 0px;
-    height: 100%;
+    bottom: 0;
+    right: 10px;
 }
+
+
 
 .open{
     max-height: 36px;
