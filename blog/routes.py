@@ -20,10 +20,10 @@ def home():
     else:
         return redirect(url_for('login'))
 
-@app.route("/about")
-def about():
+@app.route("/profile")
+def profile():
     if current_user.is_authenticated:
-        return render_template('about.html', title='About Me')
+        return render_template('profile.html', title='profile')
     else:
         return redirect(url_for('login'))
     #add post page
