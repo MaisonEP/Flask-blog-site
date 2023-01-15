@@ -36,4 +36,36 @@
 
 </div>
 
+<!-- comment box here -->
+
+<div class="comment">
+
+    <form method="POST">
+        {{usercomments.csrf_token}}
+        <div class="titlelabel ">
+            {{usercomments.comment.label (class='form-label')}}
+        </div>
+
+        <div class="commentinput ">
+            {{usercomments.comment(class='form-control')}}
+        </div>
+
+        <div class="add comment">
+            <input type="submit" value="Comment" />
+        </div>
+
+    </form>
+</div>
+
+<!-- show comments should go here -->
+
+{% for comment in comments %}
+
+<div class="commentSection">
+    {{comment.comment}}
+
+</div>
+
+{% endfor %}
+
 {% endblock content %}

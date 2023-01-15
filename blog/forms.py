@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField 
-from blog.models import User
+from blog.models import User, Comments
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Regexp
 from wtforms.widgets import TextArea
 
@@ -23,6 +23,10 @@ class RegistrationForm(FlaskForm):
 class UserPost(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     blogpost = StringField('BlogPost', validators=[DataRequired()], widget=TextArea ())
+    submit = StringField('Submit')
+
+class UserComments(FlaskForm):
+    comment = StringField('Add comment', validators=[DataRequired()], widget=TextArea ())
     submit = StringField('Submit')
 
 

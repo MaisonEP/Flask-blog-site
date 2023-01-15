@@ -1,7 +1,7 @@
 from flask import render_template, url_for
 from blog import app, db
-from blog.models import Post, User
-from blog.forms import RegistrationForm, LoginForm, User, UserPost
+from blog.models import Post, User, Comments
+from blog.forms import RegistrationForm, LoginForm, User, UserPost, UserComments
 from flask import redirect, request, flash
 from flask_login import login_user, logout_user,  current_user, login_required
 
@@ -60,10 +60,20 @@ def delete_post(id):
 
         return redirect(url_for('home'))
 
-@app.route('/userPost/<int:id>')
+@app.route('/userPost/<int:id>', methods=['GET','POST'])
 def individualpost(id):
+    addcomment = UserComments()
+   
     post = Post.query.get_or_404(id)
-    return render_template('individualpost.html', post=post)
+    comments = Comments.query.filter_by(post_id=id).all()
+    if addcomment.validate_on_submit():
+        comment = Comments(comment=addcomment.comment.data,post_id=id, commenter_id=current_user.id)
+        addcomment.comment.data = ''
+
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('individualpost', id=id))
+    return render_template('individualpost.html', post=post, comments=comments, usercomments=addcomment)
 
 @app.route("/register",methods=['GET','POST'])
 def register():

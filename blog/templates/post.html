@@ -2,40 +2,42 @@
 
 
 {% block content %}
-<div class= "entireform"><form method="POST" >
-    {{form.csrf_token}}
+<div class="entireform">
+    <form method="POST">
+        {{form.csrf_token}}
 
-    <div class="postby">
-        <div class="titlelabel postform">
-            {{form.title.label (class='form-label')}}
-        </div>
-        
-        <div class="titleinput postform">
-            {{form.title(class='form-control')}}
-        </div>
-        
-        <br/>
+        <div class="postby">
+            <div class="titlelabel postform">
+                {{form.title.label (class='form-label')}}
+            </div>
 
-        <div class="blogpostlabel postform">
-            {{form.blogpost.label (class='form-label')}}
-        </div>
-        
-        <div class="blogpostinpuot postform">
-            {{form.blogpost(class='form-control', rows='10' )}}
-        </div>
-        
-        <br/>
+            <div class="titleinput postform">
+                {{form.title(class='form-control')}}
+            </div>
 
-        <div class="postbutton">
-            <input type="submit" value="Create blog">
+            <br />
+
+            <div class="blogpostlabel postform">
+                {{form.blogpost.label (class='form-label')}}
+            </div>
+
+            <div class="blogpostinpuot postform">
+                {{form.blogpost(class='form-control', rows='10' )}}
+            </div>
+
+            <br />
+
+            <div class="postbutton">
+                <input type="submit" value="Create blog" />
+            </div>
+
         </div>
 
-    </div>
-    
 
-    
-    
-</form></div>
+
+
+    </form>
+</div>
 
 
 

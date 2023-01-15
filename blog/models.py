@@ -36,6 +36,12 @@ class User(UserMixin,db.Model):
     def verify_password(self,password):
         return check_password_hash(self.hashed_password, password)
 
+class Comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    commenter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
