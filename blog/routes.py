@@ -4,6 +4,7 @@ from blog.models import Post, User, Comments
 from blog.forms import RegistrationForm, LoginForm, User, UserPost, UserComments
 from flask import redirect, request, flash
 from flask_login import login_user, logout_user,  current_user, login_required
+from sqlalchemy import delete
 
 
 
@@ -47,8 +48,10 @@ def add_blog():
 @app.route('/post/delete/<int:id>')
 def delete_post(id):
     post_to_delete= Post.query.get_or_404(id)
+    comments_to_delete =delete(Comments).where(Comments.post_id==id)
     try:
         db.session.delete(post_to_delete)
+        db.session.execute(comments_to_delete)
         db.session.commit()
         flash('Post was deleted!')
 
@@ -59,6 +62,20 @@ def delete_post(id):
         flash('Delete failed!')
 
         return redirect(url_for('home'))
+
+@app.route('/userPost/<int:post_id>/comment/<int:id>')
+def delete_comment(id, post_id):
+    try:
+        comment_to_delete =Comments.query.get_or_404(id)
+        db.session.delete(comment_to_delete)
+        db.session.commit()
+        flash('Comment has been deleted!')
+
+        return redirect(url_for('individualpost',id=post_id ))
+    except:
+        flash('Delete failed!')
+
+        return redirect(url_for('individualpost', id=post_id))
 
 @app.route('/userPost/<int:id>', methods=['GET','POST'])
 def individualpost(id):

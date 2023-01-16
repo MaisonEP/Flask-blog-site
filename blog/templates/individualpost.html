@@ -61,8 +61,12 @@
 
 {% for comment in comments %}
 
-<div class="commentSection">
+<div class="commentsection">
     {{comment.comment}}
+
+    <div class="btn btn-success" class="delete">
+        <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete Comment</a>
+    </div>
 
 </div>
 
