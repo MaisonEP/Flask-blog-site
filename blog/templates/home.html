@@ -24,22 +24,22 @@
             </p>
         </div>
         <br />
-        <p>
-        <div class="blogcontent"></div>
-        {{ post.content }}
-        </p>
-
-        <div class="viewpost">
-            <a href=" {{ url_for('individualpost', id=post.id)}}">View Post</a>
-
+        <div class="blogcontent">
+           
+                {{ post.content }}
+            
         </div>
-
-        <div class="delete">
-            <a href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
-        </div>
+       
     </div>
 
+    <div class="btn btn-success viewdelete" >
+        <a class="viewpost" href=" {{ url_for('individualpost', id=post.id)}}">View Post</a>
 
+    </div>
+
+    <div class="btn btn-success viewdelete" >
+        <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
+    </div>
 </div>
 
 {% endfor %}

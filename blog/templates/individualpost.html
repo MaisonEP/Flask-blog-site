@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="posttemplate">
+<div class="posttemplate fullpost">
 
-    <div class="bloglayout">
+    <div class=" fullpost">
         <p>
             "{{ post.title }}" &nbsp
         </p>
@@ -27,8 +27,8 @@
         {{ post.content }}
         </p>
 
-        <div class="delete">
-            <a href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
+        <div class="btn btn-success" >
+            <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
         </div>
 
     </div>
@@ -50,7 +50,7 @@
             {{usercomments.comment(class='form-control')}}
         </div>
 
-        <div class="add comment">
+        <div class="addcomment">
             <input type="submit" value="Comment" />
         </div>
 
@@ -62,12 +62,16 @@
 {% for comment in comments %}
 
 <div class="commentsection">
-    {{comment.comment}}
+    <div class="commentdelete">
+        <div class="actualcomment">
+            {{comment.comment}}
+        </div>
+    
 
-    <div class="btn btn-success" class="delete">
-        <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete Comment</a>
+        <div class="btn btn-success" class="delete">
+            <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete Comment</a>
+        </div>
     </div>
-
 </div>
 
 {% endfor %}

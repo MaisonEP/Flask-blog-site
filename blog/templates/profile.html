@@ -1,4 +1,47 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>This is my profile page</h1>
+    <div class="userdashboard">
+        
+        <h1>Welcome to your Dashboard</h1>
+        <br/><br/>
+            <div class="infopic">
+                <div class="userinfo">
+                    <strong>username: </strong>{{current_user.username}}<br/>
+                    <strong>id: </strong>{{current_user.id}}<br/>
+                    <strong></strong><br/>
+                    <strong></strong><br/>
+                </div>
+
+                <div class="profilepic">
+                    <div>
+                        <strong>Profile Picture:</strong>
+                    </div>
+                    <div>
+                        <img class="avatar" src="{{url_for('static', filename=profile_item.image_file)}}">
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="profilepicform">
+
+            <form method="POST", action="/profile", enctype="multipart/form-data">
+                {{form.csrf_token}}
+                {{form.hidden_tag()}}
+                <div class="uploadpicture">
+                    <div class="titlelabel postform">
+                        {{form.profile_pic.label (class='form-label')}}
+                    </div>
+                    <div class="titleinput postform">
+                        {{form.profile_pic(class='form-control', value=profile_item.profile_pic)}}
+                    </div>
+                
+                    <div class="picpostbutton postform">
+                        <input type="submit" value="Update Picture" />
+                    </div>
+                </div>
+            </form>
+        </div>
 {% endblock content %}

@@ -51,6 +51,33 @@
 
 }
 
+.infopic{
+    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(241, 241, 241);
+    padding: 5px;
+
+}
+
+.avatar{
+    max-height: 100px;
+}
+
+.profilepic{
+  
+    display: block;
+}
+
+.picpostbutton{
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.uploadpicture{
+    background-color: rgb(241, 241, 241);
+    margin-top: 10px;
+}
 .home {
     margin-left: 50px;
 }
@@ -80,7 +107,7 @@
 }
 
 .background {
-    background-color: rgb(53, 241, 163);
+    background-color:rgb(241, 241, 241);
     flex-grow: 1;
 }
 
@@ -113,7 +140,7 @@
 }
 
 .postform {
-    padding-top: 5px;
+   padding: 5px;
 
 
 }
@@ -128,8 +155,15 @@
     border-color: rgb(72, 143, 133);
     background-color: rgb(0, 255, 242);
     box-shadow: .1px .1px 10px black;
+    padding: 10px;
+}
+
+.bloglayout{
+    height: 230px;
+    overflow: hidden;
 
 }
+
 
 .emptyposts {
     margin-top: 10px;
@@ -158,9 +192,7 @@
     transition: max-height 10s;
 }
 
-.blogcontent {
-    max-width: 20px;
-}
+
 
 .authordate {
     display: flex;
@@ -170,28 +202,39 @@
     margin-inline: 5px;
 }
 
-.bloglayout {
-    padding: 5px;
-}
 
 .viewpost {
     display: inline-block;
-    padding: 10px;
-    background-color: rgb(126, 225, 250);
-    box-shadow: 0 0 1px;
+    text-decoration: none;
+    color: white; 
+}
+
+.addcomment{
+    padding-top: 10px;
 }
 
 
+.delete{
+    color: white;
+    text-decoration: none;
+}
 
 .commentsection {
     margin-top: 10px;
     border: 1px;
-    border-color: rgb(72, 143, 133);
-    background-color: rgb(224, 224, 224);
-
+   
+    background-color: rgb(255, 255, 255);
+    
     /* box-shadow: .1px .1px 10px black;   */
+}
+
+.commentdelete{
+    display: inline-block;
+    display: flex;
+    justify-content: space-between;
 }
 
 .buttonlink {
     text-decoration: none;
+    color: white;
 }

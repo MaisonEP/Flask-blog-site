@@ -1,11 +1,13 @@
 from flask import render_template, url_for
 from blog import app, db
 from blog.models import Post, User, Comments
-from blog.forms import RegistrationForm, LoginForm, User, UserPost, UserComments
+from blog.forms import RegistrationForm, LoginForm, User, UserPost, UserComments, ProfilePicture
 from flask import redirect, request, flash
 from flask_login import login_user, logout_user,  current_user, login_required
 from sqlalchemy import delete
-
+from werkzeug.utils import secure_filename
+import uuid as uuid
+import os
 
 
 
@@ -21,13 +23,32 @@ def home():
     else:
         return redirect(url_for('login'))
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET','POST'])
 def profile():
     if current_user.is_authenticated:
-        return render_template('profile.html', title='profile')
+        form = ProfilePicture()
+        profile_item = User.query.get_or_404(current_user.id) 
+        print(form.validate_on_submit())
+        if request.method == 'POST':
+            profilepic=request.files['profile_pic']
+            picturefilename = secure_filename(profilepic.filename)
+            picture_id =str(uuid.uuid1()) + "_" + picturefilename
+            saver = request.files['profile_pic']
+            profile_item.image_file=picture_id
+            
+            try: 
+                db.session.commit()
+                saver.save(os.path.join(app.config['UPLOAD_FOLDER'], picture_id))
+                print(saver)
+            except:
+                flash('Upload unsuccessful')
+
+        return render_template('profile.html', title='profile', form=form, profile_item=profile_item)
     else:
         return redirect(url_for('login'))
     #add post page
+
+
 @app.route('/add-blog', methods=['GET', 'POST'])
 def add_blog():
     form = UserPost()    

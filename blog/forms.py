@@ -1,8 +1,9 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, SubmitField 
 from blog.models import User, Comments
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Regexp
 from wtforms.widgets import TextArea
+from flask_wtf.file import FileField
 
 
 class RegistrationForm(FlaskForm):
@@ -34,3 +35,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField('Login')
+
+class ProfilePicture(FlaskForm):
+    profile_pic = FileField("Profile Picture", validators=[DataRequired()])
+    submit =SubmitField('Submit')
