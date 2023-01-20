@@ -22,6 +22,7 @@ class User(UserMixin,db.Model):
     hashed_password = db.Column(db.String(128))
     post = db.relationship('Post', backref='post', lazy=True)
     image_file = db.Column(db.String(40), nullable=True, default='Default_User_pic.jpg')
+    userCommentsRelationship =  db.relationship('Comments', backref='userCommentsRelationship', lazy=True)
     
 
 

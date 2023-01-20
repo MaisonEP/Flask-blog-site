@@ -101,13 +101,11 @@ def delete_comment(id, post_id):
 @app.route('/userPost/<int:id>', methods=['GET','POST'])
 def individualpost(id):
     addcomment = UserComments()
-   
     post = Post.query.get_or_404(id)
     comments = Comments.query.filter_by(post_id=id).all()
     if addcomment.validate_on_submit():
         comment = Comments(comment=addcomment.comment.data,post_id=id, commenter_id=current_user.id)
         addcomment.comment.data = ''
-
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('individualpost', id=id))

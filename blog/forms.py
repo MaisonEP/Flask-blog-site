@@ -4,6 +4,8 @@ from blog.models import User, Comments
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Regexp
 from wtforms.widgets import TextArea
 from flask_wtf.file import FileField
+from flask_ckeditor import CKEditorField
+
 
 
 class RegistrationForm(FlaskForm):
@@ -23,7 +25,7 @@ class RegistrationForm(FlaskForm):
 
 class UserPost(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    blogpost = StringField('BlogPost', validators=[DataRequired()], widget=TextArea ())
+    blogpost = CKEditorField('BlogPost', validators=[DataRequired()])
     submit = StringField('Submit')
 
 class UserComments(FlaskForm):

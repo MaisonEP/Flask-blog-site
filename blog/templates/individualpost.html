@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="posttemplate fullpost">
+<div class="posttemplate ">
 
     <div class=" fullpost">
         <p>
@@ -24,13 +24,13 @@
         <br />
         <p>
         <div class="blogcontent"></div>
-        {{ post.content }}
+        {{ post.content | safe }}
         </p>
-
-        <div class="btn btn-success" >
+        {% if current_user.id == post.poster_id %}
+        <div class="btn btn-success">
             <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
         </div>
-
+        {% endif %}
     </div>
 
 
@@ -66,11 +66,17 @@
         <div class="actualcomment">
             {{comment.comment}}
         </div>
-    
 
-        <div class="btn btn-success" class="delete">
-            <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete Comment</a>
+        <div class="commenterID">
+            {{comment.userCommentsRelationship.username}}
         </div>
+
+        {% if current_user.id == comment.commenter_id %}
+        <div class="btn btn-success" class="delete">
+            <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete
+                Comment</a>
+        </div>
+        {% endif %}
     </div>
 </div>
 

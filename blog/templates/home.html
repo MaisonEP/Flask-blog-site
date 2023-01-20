@@ -26,7 +26,7 @@
         <br />
         <div class="blogcontent">
            
-                {{ post.content }}
+                {{ post.content | safe}}
             
         </div>
        
@@ -34,13 +34,16 @@
 
     <div class="btn btn-success viewdelete" >
         <a class="viewpost" href=" {{ url_for('individualpost', id=post.id)}}">View Post</a>
-
+        
     </div>
-
-    <div class="btn btn-success viewdelete" >
-        <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
+    
+    {% if current_user.id == post.poster_id %}
+        <div class="btn btn-success viewdelete" >
+            <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
+        </div>
+    {% endif %}    
+        
     </div>
-</div>
 
 {% endfor %}
 {% else %}

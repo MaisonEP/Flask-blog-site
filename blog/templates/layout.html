@@ -14,15 +14,15 @@
 
         <div class="loggedInNav">
             <div class="homeAbout">
-                <div class="home menuItem"><a href="{{ url_for('home') }}">Home</a>&nbsp</div>
+                <div class="home menuItem"><a class="navbarelement" href="{{ url_for('home') }}">Home</a>&nbsp</div>
         
-                <div class="profile menuItem"><a href="{{ url_for('profile') }}">Profile</a>&nbsp</div>
+                <div class="profile menuItem"><a class="navbarelement" href="{{ url_for('profile') }}">Profile</a>&nbsp</div>
 
-                <div class="post menuItem"><a href="{{ url_for('add_blog') }}">Post</a>&nbsp</div>
+                <div class="post menuItem"><a class="navbarelement" href="{{ url_for('add_blog') }}">Post</a>&nbsp</div>
             </div>
         
         
-            <div class="logout menuItem"><a href="{{ url_for('logout') }}">Logout</a></div>
+            <div class="logout menuItem"><a class="navbarelement" href="{{ url_for('logout') }}">Logout</a></div>
         </div>
         
     
@@ -31,11 +31,11 @@
         <div class="loggedOutNav">
             <div class="loginMenuItem">
                 <div class="register">
-                    <div><a href=" {{ url_for('register') }}">Register</a></div>
+                    <div><a class="navbarelement" href=" {{ url_for('register') }}">Register</a></div>
                 </div>
                 
                 <div class="login">
-                    <div><a href="{{ url_for('login') }}">Login</a></div>
+                    <div><a class="navbarelement" href="{{ url_for('login') }}">Login</a></div>
                 </div>
                 
                 
