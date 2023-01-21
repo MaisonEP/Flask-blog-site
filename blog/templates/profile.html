@@ -15,32 +15,32 @@
             <div>
                 <strong>Profile Picture:</strong>
             </div>
-            <div>
-                <img class="avatar" src="{{url_for('static', filename=profile_item.image_file)}}">
+            <div class="avatarContainer">
+                <img class="avatar" src="{{url_for('static', filename=profile_item.image_file)}}" />
             </div>
 
         </div>
 
 
     </div>
-</div>
-<div class="profilepicform">
+    <div class="profilepicform">
 
-    <form method="POST" , action="/profile" , enctype="multipart/form-data">
-        {{form.csrf_token}}
-        {{form.hidden_tag()}}
-        <div class="uploadpicture">
-            <div class="titlelabel postform">
-                {{form.profile_pic.label (class='form-label')}}
-            </div>
-            <div class="titleinput postform">
-                {{form.profile_pic(class='form-control', value=profile_item.profile_pic)}}
-            </div>
+        <form method="POST" , action="/profile" , enctype="multipart/form-data">
+            {{form.csrf_token}}
+            {{form.hidden_tag()}}
+            <div class="uploadpicture">
+                <div class="titlelabel postform">
+                    {{form.profile_pic.label (class='form-label')}}
+                </div>
+                <div class="titleinput postform">
+                    {{form.profile_pic(class='form-control', value=profile_item.profile_pic)}}
+                </div>
 
-            <div class="picpostbutton postform">
-                <input type="submit" value="Update Picture" />
+                <div class="picpostbutton postform">
+                    <input class="btn btn-success" type="submit" value="Update Picture" />
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 {% endblock content %}

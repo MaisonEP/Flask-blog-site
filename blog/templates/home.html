@@ -7,13 +7,18 @@
 <div class="posttemplate">
 
     <div class="bloglayout">
-        <div class="date">
-            <i>by {{post.post.username}} on {{post.date.strftime('%d-%m-%Y at %H:%M')}}</i>
+        <div class="authordate">
+            <div class="date">
+                <i>by {{post.post.username}} on {{post.date.strftime('%d-%m-%Y at %H:%M')}}</i>
+            </div>
+            <img src="{{url_for('static', filename=post.post.image_file) }}" class="profileAvatar" />
         </div>
-        <p>
+
+
+        <h1>
             "{{ post.title }}" &nbsp
-        </p>
-        <br />
+        </h1>
+        </br>
         <div class="blogcontent">
 
             {{ post.content | safe}}

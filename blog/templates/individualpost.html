@@ -5,23 +5,21 @@
 <div class="posttemplate ">
 
     <div class=" fullpost">
+        <div class="authordate">
+            <div class="date">
+                <i>
+                    by
+                    {{post.post.username}}
+                    {{post.date.strftime('%d-%m-%Y at %H:%M')}}
+                </i>
+            </div>
+            <img src="{{url_for('static', filename=post.post.image_file)}}" class="profileAvatar" />
+        </div>
+
+
         <p>
             "{{ post.title }}" &nbsp
         </p>
-        <br />
-
-        <div class="authordate">
-            <p>
-                by
-            <div class="author">
-                {{post.post.username}}
-            </div>
-            <div class="date">
-                {{post.date}}
-            </div>
-            </p>
-        </div>
-        <br />
         <p>
         <div class="blogcontent"></div>
         {{ post.content | safe }}
@@ -51,7 +49,7 @@
         </div>
 
         <div class="addcomment">
-            <input type="submit" value="Comment" />
+            <input type="submit" value="Comment" class="btn btn-secondary" />
         </div>
 
     </form>
@@ -70,14 +68,14 @@
             <div class="actualcomment">
                 {{comment.comment}}
             </div>
-        </div>    
-        {% if current_user.id == comment.commenter_id %}
-        <div class="btn btn-success" class="delete">
-            <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete
-                Comment</a>
         </div>
-        {% endif %}
     </div>
+    {% if current_user.id == comment.commenter_id %}
+    <div class="btn btn-success">
+        <a class="buttonlink" href=" {{ url_for('delete_comment', id=comment.id, post_id=post.id)}}">Delete
+            Comment</a>
+    </div>
+    {% endif %}
 </div>
 
 {% endfor %}
