@@ -8,9 +8,23 @@ from sqlalchemy import delete
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+from functools import wraps
 
+def check_if_logged_in(f):
+    @wraps(f)
+    def wrapper_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return wrapper_function
 
-
+def check_if_already_logged_in(f):
+    @wraps(f)
+    def wrapper_function(*args, **kwargs):
+        if current_user.is_authenticated:
+            return redirect(url_for('home'))
+        return f(*args, **kwargs)
+    return wrapper_function
 
 @app.route("/")
 
@@ -42,6 +56,7 @@ def profile():
                 print(saver)
             except:
                 flash('Upload unsuccessful')
+            return redirect(url_for('profile'))
 
         return render_template('profile.html', title='profile', form=form, profile_item=profile_item)
     else:
@@ -50,6 +65,7 @@ def profile():
 
 
 @app.route('/add-blog', methods=['GET', 'POST'])
+@check_if_logged_in
 def add_blog():
     form = UserPost()    
     if form.validate_on_submit():
@@ -67,38 +83,39 @@ def add_blog():
     return render_template('post.html',form=form)
 
 @app.route('/post/delete/<int:id>')
+@check_if_logged_in
 def delete_post(id):
     post_to_delete= Post.query.get_or_404(id)
-    comments_to_delete =delete(Comments).where(Comments.post_id==id)
-    try:
-        db.session.delete(post_to_delete)
-        db.session.execute(comments_to_delete)
-        db.session.commit()
-        flash('Post was deleted!')
+    if(post_to_delete.poster_id == current_user.id):
+        comments_to_delete =delete(Comments).where(Comments.post_id==id)
+        try:
+            db.session.delete(post_to_delete)
+            db.session.execute(comments_to_delete)
+            db.session.commit()
+            flash('Post was deleted!')    
 
-        
-        return redirect(url_for('home'))
-    except:
-       
-        flash('Delete failed!')
-
-        return redirect(url_for('home'))
+            return redirect(url_for('home'))
+        except:
+            flash('Delete failed!')
+    return redirect(url_for('home'))
 
 @app.route('/userPost/<int:post_id>/comment/<int:id>')
+@check_if_logged_in
 def delete_comment(id, post_id):
-    try:
-        comment_to_delete =Comments.query.get_or_404(id)
-        db.session.delete(comment_to_delete)
-        db.session.commit()
-        flash('Comment has been deleted!')
+    comment_to_delete =Comments.query.get_or_404(id)
+    if (comment_to_delete.commenter_id == current_user.id):
+        try:
+            db.session.delete(comment_to_delete)
+            db.session.commit()
+            flash('Comment has been deleted!')
 
-        return redirect(url_for('individualpost',id=post_id ))
-    except:
-        flash('Delete failed!')
-
-        return redirect(url_for('individualpost', id=post_id))
+            return redirect(url_for('individualpost',id=post_id ))
+        except:
+            flash('Delete failed!')
+    return redirect(url_for('individualpost', id=post_id))
 
 @app.route('/userPost/<int:id>', methods=['GET','POST'])
+@check_if_logged_in
 def individualpost(id):
     addcomment = UserComments()
     post = Post.query.get_or_404(id)
@@ -112,6 +129,7 @@ def individualpost(id):
     return render_template('individualpost.html', post=post, comments=comments, usercomments=addcomment)
 
 @app.route("/register",methods=['GET','POST'])
+@check_if_already_logged_in
 def register():
     form = RegistrationForm()
     
@@ -128,10 +146,12 @@ def register():
 
 
 @app.route("/registered")
+@check_if_already_logged_in
 def registered():
     return render_template('registered.html', title='Thanks!')
 
 @app.route("/login",methods=['GET','POST'])
+@check_if_already_logged_in
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -145,8 +165,8 @@ def login():
     return render_template('login.html',title='Login',form=form)
 
 @app.route("/logout")
+@check_if_logged_in
 def logout():
- 
-        logout_user()
-        flash('Logout successful. See you soon!')
-        return redirect(url_for('home'))
+    logout_user()
+    flash('Logout successful. See you soon!')
+    return redirect(url_for('home'))
