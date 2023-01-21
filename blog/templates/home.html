@@ -7,52 +7,42 @@
 <div class="posttemplate">
 
     <div class="bloglayout">
+        <div class="date">
+            <i>by {{post.post.username}} on {{post.date.strftime('%d-%m-%Y at %H:%M')}}</i>
+        </div>
         <p>
             "{{ post.title }}" &nbsp
         </p>
         <br />
-
-        <div class="authordate">
-            <p>
-                by
-            <div class="author">
-                {{post.post.username}}
-            </div>
-            <div class="date">
-                {{post.date}}
-            </div>
-            </p>
-        </div>
-        <br />
         <div class="blogcontent">
-           
-                {{ post.content | safe}}
-            
+
+            {{ post.content | safe}}
+
         </div>
-       
+
     </div>
 
-    <div class="btn btn-success viewdelete" >
+    <div class="btn btn-success viewdelete">
         <a class="viewpost" href=" {{ url_for('individualpost', id=post.id)}}">View Post</a>
-        
+
     </div>
-    
+
     {% if current_user.id == post.poster_id %}
-        <div class="btn btn-success viewdelete" >
-            <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
-        </div>
-    {% endif %}    
-        
+    <div class="btn btn-success viewdelete">
+        <a class="delete" href="{{ url_for('delete_post', id=post.id)}}">Delete Post</a>
     </div>
+    {% endif %}
+
+</div>
 
 {% endfor %}
 {% else %}
-    <div class="emptyposts">
-        <p>
-            There are no Posts to see here!
-        </p>
+<div class="emptyposts">
+    <p>
+        There are no Posts to see here!
+    </p>
 
-    </div>
+</div>
 {% endif %}
 
 {% endblock content %}

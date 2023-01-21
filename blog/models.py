@@ -2,6 +2,7 @@ from datetime import datetime
 from blog import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import uuid as uuid
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +18,7 @@ class Post(db.Model):
 
 
 class User(UserMixin,db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Text(length=36), primary_key=True, default=lambda: str(uuid.uuid4()))
     username = db.Column(db.String(15), unique=True, nullable=False)
     hashed_password = db.Column(db.String(128))
     post = db.relationship('Post', backref='post', lazy=True)
@@ -47,4 +48,4 @@ class Comments(db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User.query.get(user_id)
