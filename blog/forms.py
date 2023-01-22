@@ -21,7 +21,7 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Username already exist. Please choose a differentone.')
+            raise ValidationError('Username already exist. Please choose a different one.')
 
 class UserPost(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
