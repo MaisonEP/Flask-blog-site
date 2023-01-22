@@ -22,11 +22,9 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(15), unique=True, nullable=False)
     hashed_password = db.Column(db.String(128))
     post = db.relationship('Post', backref='post', lazy=True)
-    image_file = db.Column(db.String(40), nullable=True, default='Default_User_pic.jpg')
+    image_file = db.Column(db.String(200), nullable=True, default='Default_User_pic.jpg')
     userCommentsRelationship =  db.relationship('Comments', backref='userCommentsRelationship', lazy=True)
     
-
-
 
     def __repr__(self):
         return f"User('{self.username}')"

@@ -42,7 +42,6 @@ def profile():
     if current_user.is_authenticated:
         form = ProfilePicture()
         profile_item = User.query.get_or_404(current_user.id) 
-        print(form.validate_on_submit())
         if request.method == 'POST':
             profilepic=request.files['profile_pic']
             picturefilename = secure_filename(profilepic.filename)
