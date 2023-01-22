@@ -89,7 +89,7 @@ def delete_post(id):
         comments_to_delete =delete(Comments).where(Comments.post_id==id)
         try:
             db.session.delete(post_to_delete)
-            db.session.execute(comments_to_delete)
+            db.engine.execute(comments_to_delete)
             db.session.commit()
             flash('Post was deleted!')    
 
