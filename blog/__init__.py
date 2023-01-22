@@ -12,7 +12,8 @@ ckeditor = CKEditor(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'blog.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c22028814:newStud01!@csmysql.cs.cf.ac.uk:3306/c22028814_dynamicwebapp'
+
 app.config['UPLOAD_FOLDER'] = 'blog/static'
 db = SQLAlchemy(app)
 
