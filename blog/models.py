@@ -9,7 +9,6 @@ class Post(db.Model):
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    image_file = db.Column(db.String(40), nullable=True, default='default.jpg')
     poster_id = db.Column(db.VARCHAR(36), db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
