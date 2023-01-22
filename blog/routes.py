@@ -131,16 +131,18 @@ def individualpost(id):
 @check_if_already_logged_in
 def register():
     form = RegistrationForm()
-    
+    if form.validate_on_submit():
+        try:
+            user = User(username=form.username.data, password=form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration successful!')
+            return redirect(url_for('login'))
+        except:
+            flash('Registration unsuccessful!')
     if form.username.errors:
         for error in form.username.errors:
             flash(error)
-    if form.validate_on_submit():
-        user = User(username=form.username.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Registration successful!')
-        return redirect(url_for('login'))
     return render_template('register.html',title='Register',form=form)
 
 
